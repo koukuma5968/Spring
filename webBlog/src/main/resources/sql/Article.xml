@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.model.sql.mapper.ArticleMapper">
+
+	<select id="SEL_ARTILCE_MNG" resultType="com.model.sql.dto.ArticleMNG" parameterType="com.param.ParamBean">
+		SELECT 
+		  A.ID, 
+		  A.NAME,
+		  A.TITLE, 
+		  A.REG_DATE, 
+		  A.UP_DATE, 
+		  A.CATEGORY_ID, 
+		  B.NAME AS CATEGORY_NAME, 
+          B.DIR AS CATEGORY_DIR, 
+		  A.LANGUAGE_ID, 
+		  C.NAME AS LANGUAGE_NAME 
+        FROM 
+          ARTICLE_MNG A,
+          CATEGORY_MNG B,
+          LANGUAGE_MNG C 
+        WHERE 
+          A.CATEGORY_ID = B.ID 
+        AND 
+          A.LANGUAGE_ID = C.ID 
+        <choose>
+          <when test="type == 1">
+          AND 
+            A.CATEGORY_ID = #{id} 
+          </when>
+          <when test="type == 2">
+          AND 
+            A.LANGUAGE_ID = #{id} 
+          </when>
+        </choose>
+        ORDER BY A.UP_DATE DESC
+	</select>
+
+    <select id="SEL_ARTILCE_MNG_NAME" resultType="com.model.sql.dto.ArticleMNG" parameterType="com.param.ParamBean">
+        SELECT 
+          A.TITLE 
+        FROM 
+          ARTICLE_MNG A 
+        WHERE 
+          A.NAME = #{path} 
+    </select>
+
+    <select id="SEL_SIDE_LINK" resultType="com.model.sql.dto.SideLink" parameterType="com.param.ParamBean">
+        SELECT 
+          LINK_ID,
+          LINK_TEXT
+        FROM 
+          SIDE_LINK 
+        WHERE
+          ARTICLE_ID = #{id}
+        ORDER BY INDEX_ID
+    </select>
+
+    <select id="SEL_CATEGORY_MNG" resultType="com.model.sql.dto.CategoryMng">
+        SELECT 
+          ID,
+          NAME
+        FROM 
+          CATEGORY_MNG 
+        ORDER BY ID
+    </select>
+
+    <select id="SEL_CATEGORY_MNG_NAME" resultType="com.model.sql.dto.CategoryMng" parameterType="com.param.ParamBean">
+        SELECT 
+          NAME
+        FROM 
+          CATEGORY_MNG 
+        WHERE 
+          ID = #{id}
+    </select>
+
+    <select id="SEL_LANGUAGE_MNG" resultType="com.model.sql.dto.LanguageMng">
+        SELECT 
+          ID,
+          NAME
+        FROM 
+          LANGUAGE_MNG 
+        ORDER BY ID
+    </select>
+
+    <select id="SEL_LANGUAGE_MNG_NAME" resultType="com.model.sql.dto.LanguageMng" parameterType="com.param.ParamBean">
+        SELECT 
+          NAME
+        FROM 
+          LANGUAGE_MNG 
+        WHERE 
+          ID = #{id}
+    </select>
+
+    <select id="SEL_ARCHIVE_LIST" resultType="com.model.sql.dto.ArticleMNG">
+        SELECT 
+          A.REG_DATE 
+        FROM 
+          ARTICLE_MNG A
+        ORDER BY A.REG_DATE DESC
+    </select>
+
+    <select id="SEL_CONTENT_MNG" resultType="com.model.sql.dto.ContentMng">
+        SELECT 
+          A.ID, 
+          A.NAME, 
+          A.PATH, 
+          A.FILE_NAME, 
+          A.SIZE, 
+          A.TYPE 
+        FROM 
+          CONTENT_MNG A
+        ORDER BY A.ID 
+    </select>
+
+    <update id="UPD_CONTENT_DL_SEQ_RESET">
+        UPDATE 
+          CONTENT_DL_SEQ 
+        SET 
+          ID=LAST_INSERT_ID(0);
+    </update>
+
+    <update id="UPD_CONTENT_DL_SEQ_INCRIMENT">
+        UPDATE 
+          CONTENT_DL_SEQ
+        SET 
+          ID=LAST_INSERT_ID(ID+1);
+    </update>
+
+    <insert id="INS_DL_HISTORY" parameterType="com.param.HistoryBean">
+		INSERT INTO DL_HISTORY (
+		  DL_DATE,
+		  SEQ_ID,
+		  AGENT 
+		) VALUES ( 
+		  #{date},
+		  (SELECT LAST_INSERT_ID()),
+		  #{agent} 
+		);
+    </insert>
+
+    <update id="UPD_ACCSSES_HIST_SEQ_RESET">
+        UPDATE 
+          ACCSSES_HIST_SEQ 
+        SET 
+          ID=LAST_INSERT_ID(0);
+    </update>
+
+    <update id="UPD_ACCSSES_HIST_SEQ_INCRIMENT">
+        UPDATE 
+          ACCSSES_HIST_SEQ
+        SET 
+          ID=LAST_INSERT_ID(ID+1);
+    </update>
+
+    <insert id="INS_ACCSSES_HISTORY" parameterType="com.param.HistoryBean">
+		INSERT INTO ACCSSES_HISTORY (
+		  ACCSSES_DATE,
+		  SEQ_ID,
+		  ACCSSES_PAGE,
+		  AGENT 
+		) VALUES ( 
+		  #{date},
+		  (SELECT ID FROM ACCSSES_HIST_SEQ),
+		  #{page},
+		  #{agent} 
+		);
+    </insert>
+
+</mapper>

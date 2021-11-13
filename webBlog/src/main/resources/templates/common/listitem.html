@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<body>
+	<th:block th:fragment="listitemFragment">
+	   <div class="item" th:each="item: ${itemList}">
+	       <a th:href="@{'/article?get='+${item.encParam}}" th:text="${item.text}"></a>
+	   </div>
+	</th:block>
+</body>
+</html>

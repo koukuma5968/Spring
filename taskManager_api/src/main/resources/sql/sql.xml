@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.task.sql.mapper.SqlMapper">
+
+	<select id="SEL_PROJECT_MNG" resultType="com.manager.task.sql.dto.ProjectMng" parameterType="com.manager.task.sql.dto.DataTransferObject">
+		SELECT 
+			A.ID, 
+			A.NAME, 
+			A.STARTDAY, 
+			A.ENDDAY, 
+			A.GROUP_ID, 
+			A.REG_DATE, 
+			A.UP_DATE 
+        FROM 
+          PROJECT_MNG A 
+        WHERE 
+          A.GROUP_ID in (
+            SELECT 
+              B.ID 
+            FROM 
+              GROUP_MNG B 
+            JOIN 
+              USER_MNG C 
+            ON 
+              B.GATE_KEY = C.GATE_KEY
+            WHERE
+              C.GATE_KEY = #{gate_key}
+          ) 
+        ORDER BY A.REG_DATE ASC
+	</select>
+
+    <insert id="INS_PROJECT_MNG" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        INSERT INTO PROJECT_MNG (
+          NAME, 
+          STARTDAY, 
+          ENDDAY, 
+          GROUP_ID 
+        ) VALUES ( 
+          #{name},
+          #{startDay},
+          #{endDay},
+          #{group_id} 
+        );
+    </insert>
+
+    <select id="SEL_USER_MNG" resultType="com.manager.task.sql.dto.UserMng" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        SELECT 
+          A.GATE_KEY, 
+          A.USER_ID, 
+          A.EMAIL_ADD,
+          A.FAMILY_NAME, 
+          A.FIRST_NAME, 
+          A.PASS_ENC,
+          A.REG_DATE, 
+          A.UP_DATE 
+        FROM 
+          USER_MNG A 
+        WHERE 
+          A.USER_ID = #{user_id} 
+    </select>    
+
+    <insert id="INS_USER_MNG" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        INSERT INTO USER_MNG (
+          GATE_KEY, 
+          USER_ID, 
+          EMAIL_ADD,
+          FAMILY_NAME, 
+          FIRST_NAME, 
+          PASS_ENC
+        ) VALUES ( 
+          #{gate_key},
+          #{user_id},
+          #{email_add},
+          #{family_name},
+          #{first_name},
+          #{pass_enc}
+        );
+    </insert>
+
+    <select id="SEL_GROUP_MNG" resultType="com.manager.task.sql.dto.GroupMng" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        SELECT 
+          A.ID, 
+          A.NAME, 
+          A.GATE_KEY, 
+          A.SCOPE 
+        FROM 
+          GROUP_MNG A 
+        WHERE 
+          A.GATE_KEY = #{gate_key} 
+    </select>    
+
+    <select id="SEL_GROUP_OPTION" resultType="com.manager.task.sql.dto.GroupOption" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        SELECT 
+          A.ID AS VALUE, 
+          A.NAME AS LABEL 
+        FROM 
+          GROUP_MNG A 
+        WHERE 
+          A.GATE_KEY = #{gate_key} 
+    </select>    
+
+    <select id="SEL_GROUP_MNG_MAX_ID" resultType="int">
+        SELECT 
+          CASE WHEN COUNT(A.ID) != 0 
+            THEN MAX(A.ID) 
+            ELSE 0 
+          END
+        FROM 
+          GROUP_MNG A 
+    </select>    
+
+    <insert id="INS_GROUP_MNG" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        INSERT INTO GROUP_MNG (
+          ID, 
+          NAME, 
+          GATE_KEY, 
+          SCOPE 
+        ) VALUES ( 
+          ${id},
+          #{name},
+          #{gate_key},
+          #{scope}
+        )
+    </insert>
+
+    <insert id="INS_GROUP_AUTHORITY" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        INSERT INTO GROUP_AUTHORITY (
+          GROUP_ID, 
+          GATE_KEY, 
+          AUTHORITY_LEVEL 
+        ) VALUES ( 
+          ${group_id},
+          #{gate_key},
+          ${authority_level} 
+        );
+    </insert>
+
+    <update id="UPD_CONTENT_DL_SEQ_RESET">
+        UPDATE 
+          CONTENT_DL_SEQ 
+        SET 
+          ID=LAST_INSERT_ID(0);
+    </update>
+
+</mapper>

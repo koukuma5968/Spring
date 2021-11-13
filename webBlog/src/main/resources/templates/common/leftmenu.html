@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="leftmenu" th:fragment="leftsidemenuFragment">
+        <th:block th:insert="common/header :: headerFragment"></th:block>
+        <div class="category" th:insert="common/category :: categoryFragment"></div>
+        <div class="language" th:insert="common/language :: languageFragment"></div>
+	    <div class="content" th:insert="common/content :: contentFragment"></div>
+    </div>
+</body>
+</html>

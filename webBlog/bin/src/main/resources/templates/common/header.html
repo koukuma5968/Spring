@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<div id="headerBody" th:fragment="headerBody">
+    <p class="title" th:text="${title}"></p>
+    <ul class="link">
+        <li th:each="headLink: ${headLinkList}" th:object="${headLink}">
+            <div>[[*{link}]]</div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

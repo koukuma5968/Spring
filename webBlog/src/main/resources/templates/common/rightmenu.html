@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="rightmenu" th:fragment="rightsidemenuFragment">
+		<div class="subinfo">
+		    <div class="link" th:each="info: ${sideLink}">
+		        <a th:href="'#'+${info.link_id}" th:text="${info.link_text}"></a>
+		    </div>
+		</div>
+    </div>
+</body>
+</html>

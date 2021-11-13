@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/sidemenu.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/toppage.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/content.css}" />
+</head>
+<body>
+<th:block th:insert="common/leftmenu :: leftsidemenuFragment"></th:block>
+<main class="main-inner">
+    <div class="ContentPage">
+		<div class="Content">
+            <th:block th:replace="${contentBean.contentHtml}"></th:block>
+		</div>
+    </div>
+</main>
+</body>
+</html>

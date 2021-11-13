@@ -1,0 +1,27 @@
+server:
+  port: 8090
+  servlet: 
+    context-path: /chartview/
+tomcat: 
+  document-root: /wwwroot/document
+  ajp: 
+    port: 8009
+    remoteauthentication: false
+spring:
+  data:
+    rest:
+      base-path: /api
+  datasource:
+    username: taskmnguser
+    password: taskMng&01
+    url: jdbc:mysql://192.168.2.122:3306/taskmngdb
+#    url: jdbc:mysql://192.168.2.123:3306/taskmngdb
+    driverClassName: com.mysql.cj.jdbc.Driver
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+mybatis:
+  mapper-locations: classpath*:/sql/*.xml

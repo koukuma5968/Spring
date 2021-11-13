@@ -1,0 +1,10 @@
+server:
+  port: 9080
+  servlet:
+    context-path: /blog
+spring:
+  datasource:
+    username: kou
+    password: Kosuke&5968
+    url: jdbc:mysql://localhost:3306/sample_db
+    driverClassName: com.mysql.cj.jdbc.Driver

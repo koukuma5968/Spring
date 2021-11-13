@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="headerFragment">
+    <div class="Toptitle">
+        <div class="new-entry">
+            <div class="new-title">
+                <th:block th:each="head: ${headlist}">
+                    <h3><a th:href="@{${head.link}}" th:text="${head.title}"></a></h3>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

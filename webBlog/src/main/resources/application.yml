@@ -1,0 +1,29 @@
+server:
+  port: 8090
+  servlet: 
+    context-path: /blog/
+tomcat: 
+  document-root: /wwwroot/document
+  cssfiles: classpath*:static/css/*.css
+  ajp: 
+    port: 8009
+    remoteauthentication: false
+spring:
+  thymeleaf.cache: false
+  data:
+    rest:
+      base-path: /api
+  datasource:
+    username: externaluser
+    password: externalPass&01
+    url: jdbc:mysql://192.168.2.122:3306/weblogdb
+#    url: jdbc:mysql://192.168.2.123:3306/weblogdb
+    driverClassName: com.mysql.cj.jdbc.Driver
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+mybatis:
+  mapper-locations: classpath*:/sql/*.xml

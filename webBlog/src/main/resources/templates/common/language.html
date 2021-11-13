@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<body>
+	<th:block th:fragment="languageFragment">
+		<h3>言語</h3>
+		<ul>
+			<li class="link" th:each="lang: ${languageList}">
+				<a th:href="@{'/category?get='+${lang.encParam}}" th:text="${lang.name}"></a>
+			</li>
+		</ul>
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div class="subinfo" th:fragment="sideBody">
+        <div class="link" th:each="side: ${sideLinkList}">
+			<a th:href="'#'+${side.linkid}" th:text="${side.linkitem}"></a>
+		</div>
+	</div>
+</body>
+</html>
