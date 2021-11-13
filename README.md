@@ -1,2 +1,2 @@
 # Spring
-Spring bootで作成したアプリ
+Spring boot作成
