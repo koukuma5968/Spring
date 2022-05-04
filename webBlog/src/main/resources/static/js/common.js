@@ -1,0 +1,7 @@
+/**
+ * 
+ */
+
+function getCategroy(param) {
+	window
+}

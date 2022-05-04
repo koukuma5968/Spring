@@ -13,6 +13,10 @@ public interface SqlMapper {
 
 	public int INS_PROJECT_MNG(DataTransferObject data);
 
+	public int INS_TASK_MNG(DataTransferObject data);
+
+	public List<DataTransferObject> SEL_PROCESS_MNG(DataTransferObject param);
+
 	public List<DataTransferObject> SEL_USER_MNG(DataTransferObject user);
 
 	public int INS_USER_MNG(DataTransferObject data);
@@ -27,4 +31,5 @@ public interface SqlMapper {
 
 	public List<DataTransferObject> SEL_GROUP_OPTION(DataTransferObject data);
 
+	public List<DataTransferObject> SEL_PROJECT_OPTION(DataTransferObject data);
 }

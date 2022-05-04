@@ -9,6 +9,9 @@ public class ProjectMng implements DataTransferObject {
 	private int group_id;
 	private String reg_date;
 	private String up_date;
+	private int process_count;
+	private int task_count;
+	private int task_remain_count;
 
 	public int getId() {
 		return id;
@@ -51,6 +54,24 @@ public class ProjectMng implements DataTransferObject {
 	}
 	public void setUp_date(String up_date) {
 		this.up_date = up_date;
+	}
+	public int getProcess_count() {
+		return process_count;
+	}
+	public void setProcess_count(int process_count) {
+		this.process_count = process_count;
+	}
+	public int getTask_count() {
+		return task_count;
+	}
+	public void setTask_count(int task_count) {
+		this.task_count = task_count;
+	}
+	public int getTask_remain_count() {
+		return task_remain_count;
+	}
+	public void setTask_remain_count(int task_remain_count) {
+		this.task_remain_count = task_remain_count;
 	}
 
 }

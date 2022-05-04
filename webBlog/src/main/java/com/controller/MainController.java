@@ -28,11 +28,11 @@ public class MainController extends PageBuilder {
 			HttpServletResponse response, HttpServletRequest request) {
 
 		String ret = "main/home";
-		if (UserAgentType.checkMobile(userAgent)) {
-			ret = "mobile/mhome";
-		} else {
+//		if (UserAgentType.checkMobile(userAgent)) {
+//			ret = "mobile/mhome";
+//		} else {
 			super.execute(model, userAgent);
-		}
+//		}
 
 		return ret;
 	}
@@ -45,11 +45,11 @@ public class MainController extends PageBuilder {
 		ParamBean bean = cipr.decode(param);
 
 		String ret = "main/category";
-		if (UserAgentType.checkMobile(userAgent)) {
-			ret = "mobile/mhome";
-		} else {
+//		if (UserAgentType.checkMobile(userAgent)) {
+//			ret = "mobile/mhome";
+//		} else {
 			super.executeCategory(model, bean, userAgent);
-		}
+//		}
 
 		return ret;
 	}
@@ -62,11 +62,11 @@ public class MainController extends PageBuilder {
 		ParamBean bean = cipr.decode(param);
 
 		String ret = "main/article";
-		if (UserAgentType.checkMobile(userAgent)) {
-			ret = "mobile/mhome";
-		} else {
+//		if (UserAgentType.checkMobile(userAgent)) {
+//			ret = "mobile/mhome";
+//		} else {
 			super.executeArticle(model, bean, userAgent);
-		}
+//		}
 
 		return ret;
 	}

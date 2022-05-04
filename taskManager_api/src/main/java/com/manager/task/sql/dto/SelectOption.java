@@ -1,6 +1,6 @@
 package com.manager.task.sql.dto;
 
-public class GroupOption implements DataTransferObject {
+public class SelectOption implements DataTransferObject {
 
 	private String value;
 	private String label;

@@ -8,13 +8,31 @@
 		SELECT 
 			A.ID, 
 			A.NAME, 
-			A.STARTDAY, 
-			A.ENDDAY, 
+			DATE_FORMAT(A.STARTDAY, '%Y/%m/%d') AS STARTDAY, 
+            DATE_FORMAT(A.ENDDAY, '%Y/%m/%d') AS ENDDAY, 
 			A.GROUP_ID, 
 			A.REG_DATE, 
-			A.UP_DATE 
+			A.UP_DATE, 
+<!-- 			COUNT(B.ID) AS PROCESS_COUNT,
+ -->
+            COUNT(C.ID) AS TASK_COUNT, 
+            COUNT(C.STATUS != 3 OR NULL) AS TASK_REMAIN_COUNT
         FROM 
           PROJECT_MNG A 
+<!-- 
+        LEFT JOIN 
+          PROCESS_MNG B 
+        ON 
+          A.ID = B.PROJECT_ID 
+        LEFT JOIN 
+          TASK_MNG C 
+        ON 
+          B.ID = C.PROCESS_ID 
+-->
+        LEFT JOIN 
+          TASK_MNG C 
+        ON 
+          A.ID = C.PROJECT_ID 
         WHERE 
           A.GROUP_ID in (
             SELECT 
@@ -28,7 +46,10 @@
             WHERE
               C.GATE_KEY = #{gate_key}
           ) 
-        ORDER BY A.REG_DATE ASC
+        GROUP BY 
+          A.ID, A.NAME, A.STARTDAY, A.ENDDAY, A.GROUP_ID, A.REG_DATE, A.UP_DATE
+        ORDER BY 
+          A.REG_DATE ASC 
 	</select>
 
     <insert id="INS_PROJECT_MNG" parameterType="com.manager.task.sql.dto.DataTransferObject">
@@ -42,6 +63,35 @@
           #{startDay},
           #{endDay},
           #{group_id} 
+        );
+    </insert>
+
+    <select id="SEL_PROCESS_MNG" resultType="com.manager.task.sql.dto.ProcessMng" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        SELECT 
+            A.ID, 
+            A.NAME 
+        FROM 
+          PROCESS_MNG A 
+        WHERE 
+          A.PROJECT_ID = #{project_id}
+        ORDER BY A.PROC ASC
+    </select>
+
+    <insert id="INS_TASK_MNG" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        INSERT INTO TASK_MNG (
+          NAME, 
+          STARTDAY, 
+          ENDDAY, 
+          STATUS,
+          PROJECT_ID, 
+          PROC
+        ) VALUES ( 
+          #{name},
+          #{startDay},
+          #{endDay},
+          0,
+          ${project_id}, 
+          ${proc} 
         );
     </insert>
 
@@ -91,7 +141,7 @@
           A.GATE_KEY = #{gate_key} 
     </select>    
 
-    <select id="SEL_GROUP_OPTION" resultType="com.manager.task.sql.dto.GroupOption" parameterType="com.manager.task.sql.dto.DataTransferObject">
+    <select id="SEL_GROUP_OPTION" resultType="com.manager.task.sql.dto.SelectOption" parameterType="com.manager.task.sql.dto.DataTransferObject">
         SELECT 
           A.ID AS VALUE, 
           A.NAME AS LABEL 
@@ -99,6 +149,45 @@
           GROUP_MNG A 
         WHERE 
           A.GATE_KEY = #{gate_key} 
+    </select>    
+
+    <select id="SEL_PROJECT_OPTION" resultType="com.manager.task.sql.dto.SelectOption" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        SELECT 
+          A.ID AS VALUE, 
+          A.NAME AS LABEL 
+        FROM 
+          PROJECT_MNG A 
+<!-- 
+        LEFT JOIN 
+          PROCESS_MNG B 
+        ON 
+          A.ID = B.PROJECT_ID 
+        LEFT JOIN 
+          TASK_MNG C 
+        ON 
+          B.ID = C.PROCESS_ID 
+-->
+        LEFT JOIN 
+          TASK_MNG C 
+        ON 
+          A.ID = C.PROJECT_ID 
+        WHERE 
+          A.GROUP_ID in (
+            SELECT 
+              B.ID 
+            FROM 
+              GROUP_MNG B 
+            JOIN 
+              USER_MNG C 
+            ON 
+              B.GATE_KEY = C.GATE_KEY
+            WHERE
+              C.GATE_KEY = #{gate_key}
+          ) 
+        GROUP BY 
+          A.ID, A.NAME 
+        ORDER BY 
+          A.REG_DATE ASC 
     </select>    
 
     <select id="SEL_GROUP_MNG_MAX_ID" resultType="int">

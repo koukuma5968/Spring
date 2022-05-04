@@ -28,13 +28,17 @@
           <when test="type == 1">
           AND 
             A.CATEGORY_ID = #{id} 
+          ORDER BY A.ID ASC
           </when>
           <when test="type == 2">
           AND 
             A.LANGUAGE_ID = #{id} 
+          ORDER BY A.ID ASC
           </when>
+          <otherwise>
+          ORDER BY A.UP_DATE DESC
+          </otherwise>
         </choose>
-        ORDER BY A.UP_DATE DESC
 	</select>
 
     <select id="SEL_ARTILCE_MNG_NAME" resultType="com.model.sql.dto.ArticleMNG" parameterType="com.param.ParamBean">

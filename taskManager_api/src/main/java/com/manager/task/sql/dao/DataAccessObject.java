@@ -17,6 +17,14 @@ public class DataAccessObject {
 		return sqlMapper.INS_PROJECT_MNG(data);
 	}
 
+	public static int addTaskMNG(DataTransferObject data) {
+		return sqlMapper.INS_TASK_MNG(data);
+	}
+
+	public static List<DataTransferObject> getProcessMNG(DataTransferObject param) {
+		return sqlMapper.SEL_PROCESS_MNG(param);
+	}
+
 	public static List<DataTransferObject> getUserMNG(DataTransferObject user) {
 		return sqlMapper.SEL_USER_MNG(user);
 	}
@@ -43,5 +51,9 @@ public class DataAccessObject {
 
 	public static List<DataTransferObject> getGroupOption(DataTransferObject data) {
 		return sqlMapper.SEL_GROUP_OPTION(data);
+	}
+
+	public static List<DataTransferObject> getProjectOption(DataTransferObject data) {
+		return sqlMapper.SEL_PROJECT_OPTION(data);
 	}
 }

@@ -94,7 +94,7 @@
 }
  */
 .subinfo {
-    position: sticky;
+    position: fixed;
     top : 50px;
     float: right;
     clear: none;
@@ -102,6 +102,7 @@
 	text-align: left;
 	color: #c0c0c0;
 	padding: 10px;
+	margin-right: 5px;
 	max-height: 100vh;
 }
 

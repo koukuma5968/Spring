@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.manager.task.sql.dao.DataAccessObject;
 import com.manager.task.sql.dto.DataTransferObject;
 import com.manager.task.sql.dto.GroupAuthority;
 import com.manager.task.sql.dto.GroupMng;
 import com.manager.task.sql.dto.ProjectMng;
+import com.manager.task.sql.dto.TaskMng;
 import com.manager.task.sql.dto.UserMng;
 import com.manager.task.sql.mapper.SqlMapper;
 import com.manager.task.util.KeyGenerater;
@@ -49,7 +47,7 @@ public class ApiController {
 				ret.put("check", true);
 				ret.put("userdata", getUser);
 				List<DataTransferObject> grouplist = DataAccessObject.getGroupOption(getUser);
-				
+
 				ret.put("groupoption", grouplist);
 			}
 		}
@@ -93,17 +91,22 @@ public class ApiController {
 	}
 
 	@PostMapping("getproject")
-	public List<DataTransferObject> getProjectData (
+	public Map<String, List<DataTransferObject>> getProjectData (
 			@RequestHeader("User-Agent") String userAgent, 
 			@RequestBody UserMng userMng) {
 
 		List<DataTransferObject> pm = DataAccessObject.getProjectMNG(userMng);
+		List<DataTransferObject> pmop = DataAccessObject.getProjectOption(userMng);
 
-		return pm;
+		Map<String, List<DataTransferObject>> ret = new HashMap<String, List<DataTransferObject>>();
+		ret.put("list", pm);
+		ret.put("option", pmop);
+
+		return ret;
 	}
 
 	@PostMapping("createproject")
-	public List<DataTransferObject> createProjectData (
+	public Map<String, List<DataTransferObject>> createProjectData (
 			@RequestHeader("User-Agent") String userAgent, 
 			@RequestBody Map<String, HashMap<String, String>> updateParam) {
 
@@ -119,9 +122,27 @@ public class ApiController {
 		UserMng userMng = new UserMng();
 		userMng.setGate_key(updateParam.get("userMng").get("gate_key"));
 
-		List<DataTransferObject> pm = DataAccessObject.getProjectMNG(userMng);
-
-		return pm;
+		return getProjectData(userAgent, userMng);
 	}
 
+	@PostMapping("createtask")
+	public Map<String, List<DataTransferObject>> createTaskData (
+			@RequestHeader("User-Agent") String userAgent, 
+			@RequestBody Map<String, HashMap<String, String>> updateParam) {
+
+		TaskMng uppm = new TaskMng();
+		HashMap<String, String> pmparam = updateParam.get("taskMng");
+		uppm.setName(pmparam.get("name"));
+		uppm.setStartDay(pmparam.get("startDay").replace("/", "")); 
+		uppm.setEndDay(pmparam.get("endDay").replace("/", "")); 
+		uppm.setProject_id(Integer.valueOf(pmparam.get("project_id")));
+		uppm.setProc(Integer.valueOf(pmparam.get("procsel")));
+
+		DataAccessObject.addTaskMNG(uppm);
+
+		UserMng userMng = new UserMng();
+		userMng.setGate_key(updateParam.get("userMng").get("gate_key"));
+
+		return getProjectData(userAgent, userMng);
+	}
 }
