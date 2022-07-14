@@ -12,27 +12,9 @@
             DATE_FORMAT(A.ENDDAY, '%Y/%m/%d') AS ENDDAY, 
 			A.GROUP_ID, 
 			A.REG_DATE, 
-			A.UP_DATE, 
-<!-- 			COUNT(B.ID) AS PROCESS_COUNT,
- -->
-            COUNT(C.ID) AS TASK_COUNT, 
-            COUNT(C.STATUS != 3 OR NULL) AS TASK_REMAIN_COUNT
+			A.UP_DATE 
         FROM 
           PROJECT_MNG A 
-<!-- 
-        LEFT JOIN 
-          PROCESS_MNG B 
-        ON 
-          A.ID = B.PROJECT_ID 
-        LEFT JOIN 
-          TASK_MNG C 
-        ON 
-          B.ID = C.PROCESS_ID 
--->
-        LEFT JOIN 
-          TASK_MNG C 
-        ON 
-          A.ID = C.PROJECT_ID 
         WHERE 
           A.GROUP_ID in (
             SELECT 
@@ -46,8 +28,6 @@
             WHERE
               C.GATE_KEY = #{gate_key}
           ) 
-        GROUP BY 
-          A.ID, A.NAME, A.STARTDAY, A.ENDDAY, A.GROUP_ID, A.REG_DATE, A.UP_DATE
         ORDER BY 
           A.REG_DATE ASC 
 	</select>
@@ -75,6 +55,24 @@
         WHERE 
           A.PROJECT_ID = #{project_id}
         ORDER BY A.PROC ASC
+    </select>
+
+    <select id="SEL_TASK_MNG" resultType="com.manager.task.sql.dto.TaskMng" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        SELECT 
+          A.ID, 
+          CONCAT(A.ID, '_', A.NAME) AS draggableId, 
+          A.NAME, 
+          A.PROJECT_ID,
+          A.STARTDAY, 
+          A.ENDDAY, 
+          A.STATUS,
+          A.MODDATE 
+        FROM 
+          TASK_MNG A 
+        WHERE 
+          A.PROJECT_ID = #{id} 
+        ORDER BY 
+          A.ID ASC 
     </select>
 
     <insert id="INS_TASK_MNG" parameterType="com.manager.task.sql.dto.DataTransferObject">
@@ -233,4 +231,15 @@
           ID=LAST_INSERT_ID(0);
     </update>
 
+    <update id="UPD_TASK_STATUS" parameterType="com.manager.task.sql.dto.DataTransferObject">
+        UPDATE 
+          TASK_MNG A
+        SET 
+          A.STATUS=${status},
+          A.MODDATE=REPLACE(LEFT(CURDATE(), 10), '-', '')
+        WHERE 
+          A.ID=#{id} 
+        AND 
+          A.PROJECT_ID = #{project_id} 
+    </update>
 </mapper>

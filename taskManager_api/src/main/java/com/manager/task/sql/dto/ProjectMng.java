@@ -1,5 +1,8 @@
 package com.manager.task.sql.dto;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+
 public class ProjectMng implements DataTransferObject {
 
 	private int id;
@@ -12,6 +15,8 @@ public class ProjectMng implements DataTransferObject {
 	private int process_count;
 	private int task_count;
 	private int task_remain_count;
+	private LinkedHashMap<String, List<DataTransferObject>> task;
+	private List<DownchartBean> downchartList;
 
 	public int getId() {
 		return id;
@@ -72,6 +77,18 @@ public class ProjectMng implements DataTransferObject {
 	}
 	public void setTask_remain_count(int task_remain_count) {
 		this.task_remain_count = task_remain_count;
+	}
+	public LinkedHashMap<String, List<DataTransferObject>> getTask() {
+		return task;
+	}
+	public void setTask(LinkedHashMap<String, List<DataTransferObject>> task) {
+		this.task = task;
+	}
+	public List<DownchartBean> getDownchartList() {
+		return downchartList;
+	}
+	public void setDownchartList(List<DownchartBean> downchartList) {
+		this.downchartList = downchartList;
 	}
 
 }

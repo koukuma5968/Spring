@@ -3,11 +3,13 @@ package com.manager.task.sql.dto;
 public class TaskMng implements DataTransferObject {
 
 	private int id;
+	private String draggableId;
 	private String name;
 	private String startDay;
 	private String endDay;
-//	private int process_id;
+	private int status;
 	private int project_id;
+	private String modDate;
 	private int proc;
 
 	public int getId() {
@@ -51,6 +53,24 @@ public class TaskMng implements DataTransferObject {
 	}
 	public void setProc(int proc) {
 		this.proc = proc;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getDraggableId() {
+		return draggableId;
+	}
+	public void setDraggableId(String draggableId) {
+		this.draggableId = draggableId;
+	}
+	public String getModDate() {
+		return modDate;
+	}
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
 	}
 
 }

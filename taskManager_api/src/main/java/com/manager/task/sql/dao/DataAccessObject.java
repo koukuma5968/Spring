@@ -17,6 +17,10 @@ public class DataAccessObject {
 		return sqlMapper.INS_PROJECT_MNG(data);
 	}
 
+	public static List<DataTransferObject> getTaskMNG(DataTransferObject param) {
+		return sqlMapper.SEL_TASK_MNG(param);
+	}
+
 	public static int addTaskMNG(DataTransferObject data) {
 		return sqlMapper.INS_TASK_MNG(data);
 	}
@@ -56,4 +60,9 @@ public class DataAccessObject {
 	public static List<DataTransferObject> getProjectOption(DataTransferObject data) {
 		return sqlMapper.SEL_PROJECT_OPTION(data);
 	}
+
+	public static int updateTaskStatus(DataTransferObject data) {
+		return sqlMapper.UPD_TASK_STATUS(data);
+	}
+
 }
