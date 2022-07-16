@@ -2,7 +2,6 @@ package com.manager.task.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -30,6 +29,7 @@ import com.manager.task.util.KeyGenerater;
 import com.manager.task.util.RequestCipher;
 import com.manager.task.util.constant.TASK_KEYS;
 
+//@CrossOrigin(origins = "http://scaguih.clear-net.jp")
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping(path = "api/", method = RequestMethod.POST)
@@ -233,6 +233,7 @@ public class ApiController {
 		return getProjectData(userAgent, userMng);
 	}
 
+	@SuppressWarnings("unchecked")
 	@PostMapping("updateTaskStatus")
 	public boolean updateTaskStatus (
 			@RequestHeader("User-Agent") String userAgent, 

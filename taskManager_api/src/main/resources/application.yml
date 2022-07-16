@@ -1,11 +1,11 @@
 server:
-  port: 8090
+  port: 8091
   servlet: 
     context-path: /chartview/
 tomcat: 
   document-root: /wwwroot/document
   ajp: 
-    port: 8009
+    port: 8010
     remoteauthentication: false
 spring:
   data:
