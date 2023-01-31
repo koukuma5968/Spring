@@ -10,13 +10,14 @@ import com.model.html.header.HeaderBean;
 import com.model.sql.dao.ArticleDao;
 import com.model.sql.dao.CategoryDao;
 import com.model.sql.dao.ContentDao;
+import com.model.sql.dao.ExerciesDao;
 import com.model.sql.dao.LanguageDao;
 import com.model.sql.dto.ArticleMNG;
 import com.model.sql.dto.CategoryMng;
 import com.model.sql.dto.ContentMng;
+import com.model.sql.dto.ExercisesMng;
 import com.model.sql.dto.LanguageMng;
 import com.param.ParamBean;
-import com.util.RequestCipher;
 
 public enum CommonBuilderType implements BuilderInterface {
 
@@ -66,16 +67,10 @@ public enum CommonBuilderType implements BuilderInterface {
 				HashMap<String, Object> body = new HashMap<String, Object>();
 				CategoryMng cate = it.next();
 
-				ParamBean bean = new ParamBean();
-				bean.setId(cate.getId());
-				bean.setPath(cate.getName());
-				bean.setName(cate.getName());
-				bean.setType(1);
-
-				RequestCipher cipr = new RequestCipher();
-
+				param = new ParamBean();
+				body.put("id", cate.getId());
+				body.put("type", 1);
 				body.put("name", cate.getName());
-				body.put("encParam", cipr.encode(bean));
 
 				categoryList.add(body);
 			}
@@ -97,16 +92,9 @@ public enum CommonBuilderType implements BuilderInterface {
 				HashMap<String, Object> body = new HashMap<String, Object>();
 				LanguageMng lang = it.next();
 
-				ParamBean bean = new ParamBean();
-				bean.setId(lang.getId());
-				bean.setPath(lang.getName());
-				bean.setName(lang.getName());
-				bean.setType(2);
-
-				RequestCipher cipr = new RequestCipher();
-
+				body.put("id", lang.getId());
+				body.put("type", 2);
 				body.put("name", lang.getName());
-				body.put("encParam", cipr.encode(bean));
 
 				languageList.add(body);
 			}
@@ -128,16 +116,8 @@ public enum CommonBuilderType implements BuilderInterface {
 				HashMap<String, Object> body = new HashMap<String, Object>();
 				ArticleMNG archive = it.next();
 
-				ParamBean bean = new ParamBean();
-				bean.setId(archive.getId());
-				bean.setPath(archive.getName());
-				bean.setName(archive.getName());
-				bean.setType(2);
-
-				RequestCipher cipr = new RequestCipher();
-
+				body.put("id", archive.getId());
 				body.put("name", archive.getName());
-				body.put("encParam", cipr.encode(bean));
 
 				contentList.add(body);
 			}
@@ -159,22 +139,35 @@ public enum CommonBuilderType implements BuilderInterface {
 				HashMap<String, Object> body = new HashMap<String, Object>();
 				ContentMng content = it.next();
 
-				ParamBean bean = new ParamBean();
-				bean.setId(content.getId());
-				bean.setName(content.getName());
-				bean.setPath(content.getPath());
-				bean.setFilename(content.getFilename());
-				bean.setType(3);
-
-				RequestCipher cipr = new RequestCipher();
-
+				body.put("id", content.getId());
 				body.put("name", content.getName());
-				body.put("encParam", cipr.encode(bean));
 
 				contentList.add(body);
 			}
 
 			return contentList;
+		}
+		
+	},
+	EXERCISES("execisesList") {
+
+		@Override
+		public Object createBody(ParamBean param) {
+
+			ArrayList<Object> execisesList = new ArrayList<Object>();
+			List<ExercisesMng> exeList = ExerciesDao.getExercisesList();
+			Iterator<ExercisesMng> it = exeList.iterator();
+			while (it.hasNext()) {
+
+				HashMap<String, Object> body = new HashMap<String, Object>();
+				ExercisesMng execises = it.next();
+
+				body.put("lang", execises.getLang());
+
+				execisesList.add(body);
+			}
+
+			return execisesList;
 		}
 		
 	},

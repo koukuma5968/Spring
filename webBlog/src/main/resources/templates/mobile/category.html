@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Cache-Control" content="no-cache">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/common.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/header.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/sidemenu.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/toppage.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/article.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mobile/content.css}" />
-    <script type="text/javascript" th:src="@{/js/jquery-3.6.3.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/common.js}"></script>
-  </head>
-  <body>
-<form action="blogform" method="post">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Cache-Control" content="no-cache">
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/common.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/header.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/sidemenu.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/toppage.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/article.css}" />
+<script type="text/javascript" th:src="@{/js/jquery-3.6.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body>
 <th:block th:insert="common/leftmenu :: leftsidemenuFragment"></th:block>
 <main class="main-inner">
     <div id="left_hamburger" class="left_menu-btn" onclick="hamburger()">
@@ -40,6 +38,5 @@
         </div>
     </div>
 </main>
-</form>
-  </body>
+</body>
 </html>

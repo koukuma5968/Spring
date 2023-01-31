@@ -13,10 +13,11 @@
 }
 
 .Content {
-    width: 100%;
-    font-size: 100%;
+    width: 95%;
+    font-size: 200%;
     height: 100%;
-    margin-right: auto;
+    margin-right: 40px;
+    margin-left: 25px;
     margin-top: 10px;
     margin-bottom: 5px;
 	display: block;

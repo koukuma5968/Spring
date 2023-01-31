@@ -17,7 +17,7 @@
 	    <div class="menulist">
 			<div class="menu" th:each="article: ${articleList}">
 				<th:block th:object="${article.articleMNG}">
-					<a th:href="@{'/article?get='+${article.encParam}}">
+					<a th:href="@{'/article?pageid='+*{id}}">
 						<span class="title">
 						  <span th:text="*{title}"></span>
 						</span>

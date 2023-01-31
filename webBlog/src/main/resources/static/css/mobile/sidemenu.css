@@ -13,110 +13,54 @@
 	grid-template-rows: max-content max-content;
     border-radius: 10px 10px 10px 10px;
 }
-/* 
-.category {
-    position: relative;
-    float: right;
-    clear: none;
-    height: max-content;
+
+.leftmenu {
+	position: fixed;
+    height: auto;
+    width: 280px;
+    top: 0px;
+    left: -34%;
+    text-align: left;
     font-size: 100%;
     border-color: #666;
-    border: 1px solid #00bfff;
-    border-radius: 10px;
-    padding: 10px 0px;
-    margin-top: 20px;
+    padding: 15px 15px;
+    display: grid;
+    align-content: flex-start;
+    grid-template-rows: max-content max-content;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 5px 1px rgba(0.25,0.25,0.25,0.25);
+	transform: translateX(125%);
+	transition: all .3s linear;
+	 z-index: 1
 }
 
-.category h1 {
-    display: inline-block;
-    position: absolute;
-    top: -22px;
-    left: 10px;
-    background-color:#f5f5fa;
-    text-align: left;
-    padding: 0px 10px 0px 10px;
-    color: #1e90ff;
-    font-size: 105%;
-    font-weight: bold;
+.leftmenu.is-active{
+  transform: translateX(0);
 }
-
-.category .link {
-    text-align: left;
-    width: 40%;
-    float: left;
-    padding: 20px 10px;
-    font-weight: bold;
-}
-
-.category .link a {
-    text-decoration:none;
-    font-size: 110%;
-    font-weight: bold;
-}
-
-.language {
-    position: relative;
-    float: right;
-    clear: none;
-    height: max-content;
-    font-size: 100%;
-    border-color: #666;
-    border: 1px solid #00bfff;
-    border-radius: 10px;
-    padding: 10px 0px;
-    margin-top: 20px;
-}
-
-.language h1 {
-    display: inline-block;
-    position: absolute;
-    top: -22px;
-    left: 10px;
-    background-color:#f5f5fa;
-    text-align: left;
-    padding: 0px 10px 0px 10px;
-    color: #1e90ff;
-    font-size: 105%;
-    font-weight: bold;
-}
-
-.language .link {
-    text-align: left;
-    width: 40%;
-    float: left;
-    padding: 20px 10px;
-    font-weight: bold;
-}
-
-.language .link a {
-    text-decoration:none;
-    font-size: 110%;
-    font-weight: bold;
-}
- */
 .subinfo {
-    position: sticky;
+    position: fixed;
     top : 50px;
     float: right;
     clear: none;
-	font-size: 100%;
-	text-align: left;
-	color: #c0c0c0;
-	padding: 10px;
-	max-height: 100vh;
+    font-size: 100%;
+    text-align: left;
+    color: #c0c0c0;
+    padding: 10px;
+    margin-right: 5px;
+    max-height: 100vh;
 }
 
 .subinfo .link a {
     text-decoration:none;
-	width: 100%;
+    width: 100%;
     height: auto;
-	font-size: 100%;
+    font-size: 100%;
     list-style-type: none;
     margin: 0px 10px;
     padding : 10px 5px;
-	text-decoration: none;
-	border-top: 0.5px solid #4a488e;
-	border-bottom: 0.5px solid #4a488e;
+    text-decoration: none;
+    border-top: 0.5px solid #4a488e;
+    border-bottom: 0.5px solid #4a488e;
     display: block;
     color: #030;
     float: left;
@@ -124,21 +68,56 @@
 }
 
 .subinfo .link:hover {
-	color: #FFC;
-	background-color: #add8e6;
+    color: #FFC;
+    background-color: #add8e6;
 }
 
-.leftmenu {
-    position: absolute;
-    width: 280px;
-    text-align: left;
-    font-size: 100%;
-    border-color: #666;
-    padding: 15px 15px;
-    display: grid;
-    grid-template-rows: max-content max-content;
+.exercises_menu {
+    position: fixed;
+    font-size: 110%;
+    top : 50px;
+    float: right;
+    height: 90%;
     background-color: #FFFFFF;
     box-shadow: 0px 0px 5px 1px rgba(0.25,0.25,0.25,0.25);
+}
+
+.exercises_info {
+    clear: none;
+    text-align: left;
+    color: #c0c0c0;
+    padding: 10px;
+    margin-right: 5px;
+    max-height: 100vh;
+}
+
+.exercises_info img {
+    box-shadow: none;
+    padding-right: 10px;
+}
+
+.exercises_info .link a {
+    text-decoration:none;
+    width: 100%;
+    font-size: 100%;
+    list-style-type: none;
+    margin: 0px 10px;
+    padding-left : 5px;
+    padding-bottom : 10px;
+    text-decoration: none;
+    display: block;
+    color: #0942a9;
+    float: left;
+    text-align:left;
+}
+
+.exercises_info .link li {
+    display: block;
+}
+
+.exercises_info .link:hover {
+    color: #FFC;
+    background-color: #add8e6;
 }
 
 .archive {
@@ -154,8 +133,8 @@
 }
 
 .category {
-    position: relative;
-    float: right;
+    position: initial;
+    float: left;
     clear: none;
     height: max-content;
     font-size: 100%;
@@ -192,8 +171,8 @@
 }
 
 .language {
-    position: relative;
-    float: right;
+    position: initial;
+    float: left;
     clear: none;
     height: max-content;
     font-size: 100%;
@@ -229,8 +208,8 @@
 }
 
 .content {
-    position: relative;
-    float: right;
+    position: initial;
+    float: left;
     clear: none;
     height: max-content;
     font-size: 100%;
@@ -247,6 +226,7 @@
 
 .content .link {
     text-align: left;
+    width: 90%;
     float: left;
     padding: 5px 0px;
     font-weight: bold;
@@ -259,6 +239,43 @@
 }
 
 .content .link a:link {
+    font-size: 12.0pt;
+    font-weight: bold;
+    font-family:Verdana, “游ゴシック”, YuGothic, “Hiragino Kaku Gothic ProN”, Meiryo, sans-serif;
+}
+
+.exercises {
+    position: initial;
+    float: left;
+    clear: none;
+    height: max-content;
+    font-size: 100%;
+    padding: 10px 0px;
+    margin-top: 5px;
+}
+
+.exercises h3 {
+    text-align: left;
+    padding: 0px 15px;
+    color: #004488;
+    border-left: 4px solid #ecb630;
+}
+
+.exercises .link {
+    text-align: left;
+    width: 90%;
+    float: left;
+    padding: 5px 0px;
+    font-weight: bold;
+}
+
+.exercises .link a {
+    text-decoration:none;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+.exercises .link a:link {
     font-size: 12.0pt;
     font-weight: bold;
     font-family:Verdana, “游ゴシック”, YuGothic, “Hiragino Kaku Gothic ProN”, Meiryo, sans-serif;

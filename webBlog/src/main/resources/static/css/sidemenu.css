@@ -12,6 +12,23 @@
 	grid-template-rows: max-content max-content;
     border-radius: 10px 10px 10px 10px;
 }
+
+.leftmenu {
+    height: auto;
+    position: absolute;
+    width: 280px;
+    text-align: left;
+    font-size: 100%;
+    border-color: #666;
+    padding: 15px 15px;
+    display: grid;
+    align-content: flex-start;
+    grid-template-rows: max-content max-content;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 5px 1px rgba(0.25,0.25,0.25,0.25);
+}
+
+
 /* 
 .category {
     position: relative;
@@ -128,19 +145,53 @@
 	background-color: #add8e6;
 }
 
-.leftmenu {
-    height: 100vh;
-	position: absolute;
-    width: 280px;
-    text-align: left;
-    font-size: 100%;
-    border-color: #666;
-    padding: 15px 15px;
-    display: grid;
-    align-content: flex-start;
-    grid-template-rows: max-content max-content;
+.exercises_menu {
+    position: fixed;
+    font-size: 110%;
+    top : 50px;
+    width: 15%;
+    float: right;
+    height: 90%;
     background-color: #FFFFFF;
     box-shadow: 0px 0px 5px 1px rgba(0.25,0.25,0.25,0.25);
+}
+
+.exercises_info {
+    clear: none;
+    text-align: left;
+    color: #c0c0c0;
+    padding: 10px;
+    margin-right: 5px;
+    max-height: 100vh;
+}
+
+.exercises_info img {
+	box-shadow: none;
+    padding-right: 10px;
+}
+
+.exercises_info .link a {
+    text-decoration:none;
+    width: 100%;
+    font-size: 100%;
+    list-style-type: none;
+    margin: 0px 10px;
+    padding-left : 5px;
+    padding-bottom : 10px;
+    text-decoration: none;
+    display: block;
+    color: #0942a9;
+    float: left;
+    text-align:left;
+}
+
+.exercises_info .link li {
+    display: block;
+}
+
+.exercises_info .link:hover {
+    color: #FFC;
+    background-color: #add8e6;
 }
 
 .archive {
@@ -249,6 +300,7 @@
 
 .content .link {
     text-align: left;
+    width: 90%;
     float: left;
     padding: 5px 0px;
     font-weight: bold;
@@ -261,6 +313,43 @@
 }
 
 .content .link a:link {
+    font-size: 12.0pt;
+    font-weight: bold;
+    font-family:Verdana, “游ゴシック”, YuGothic, “Hiragino Kaku Gothic ProN”, Meiryo, sans-serif;
+}
+
+.exercises {
+    position: initial;
+    float: left;
+    clear: none;
+    height: max-content;
+    font-size: 100%;
+    padding: 10px 0px;
+    margin-top: 5px;
+}
+
+.exercises h3 {
+    text-align: left;
+    padding: 0px 15px;
+    color: #004488;
+    border-left: 4px solid #ecb630;
+}
+
+.exercises .link {
+    text-align: left;
+    width: 90%;
+    float: left;
+    padding: 5px 0px;
+    font-weight: bold;
+}
+
+.exercises .link a {
+    text-decoration:none;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+.exercises .link a:link {
     font-size: 12.0pt;
     font-weight: bold;
     font-family:Verdana, “游ゴシック”, YuGothic, “Hiragino Kaku Gothic ProN”, Meiryo, sans-serif;

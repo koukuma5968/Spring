@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.model.sql.dto.ArticleMNG;
 import com.model.sql.dto.CategoryMng;
 import com.model.sql.dto.ContentMng;
+import com.model.sql.dto.ExercisesMng;
 import com.model.sql.dto.LanguageMng;
 import com.model.sql.dto.SideLink;
 import com.param.HistoryBean;
@@ -33,6 +34,8 @@ public interface ArticleMapper {
 
 	public List<ContentMng> SEL_CONTENT_MNG();
 
+	public ContentMng SEL_CONTENT_NAME(ParamBean param);
+
 	public int UPD_CONTENT_DL_SEQ_RESET();
 
 	public int UPD_CONTENT_DL_SEQ_INCRIMENT();
@@ -44,4 +47,10 @@ public interface ArticleMapper {
 	public int UPD_ACCSSES_HIST_SEQ_INCRIMENT();
 
 	public int INS_ACCSSES_HISTORY(HistoryBean bean);
+
+	public ExercisesMng SEL_EXERCISES_MNG(ParamBean param);
+
+	public List<ExercisesMng> SEL_EXERCISES_MENU(ParamBean param);
+
+	public List<ExercisesMng> SEL_EXERCISES_LIST();
 }

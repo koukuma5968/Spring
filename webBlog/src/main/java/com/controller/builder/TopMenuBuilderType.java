@@ -30,10 +30,7 @@ public enum TopMenuBuilderType implements BuilderInterface {
 				bean.setPath(amng.getCategory_dir() + "/"+ amng.getName());
 				bean.setName(amng.getName());
 
-				RequestCipher cipr = new RequestCipher();
-
 				body.put("articleMNG", amng);
-				body.put("encParam", cipr.encode(bean));
 
 				articleList.add(body);
 			}

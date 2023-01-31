@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/common.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/header.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/sidemenu.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/toppage.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/mobile/exercises.css}" />
+<script type="text/javascript" th:src="@{/js/jquery-3.6.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body>
+<th:block th:insert="common/leftmenu :: leftsidemenuFragment"></th:block>
+<main class="main-inner">
+    <div id="left_hamburger" class="left_menu-btn" onclick="hamburger()">
+      <span class="inner_line" id="line1"></span>
+      <span class="inner_line" id="line2"></span>
+      <span class="inner_line" id="line3"></span>
+    </div>
+    <div class="ContentPage">
+		<div class="exercisesBody">
+            <th:block th:replace="${exercisesBean.exercisesHtml}"></th:block>
+		</div>
+   </div>
+   <div class="rightmenu">
+        <th:block th:insert="common/exercises_menu :: exercisesmenuFragment"></th:block>
+   </div>
+</main>
+</body>
+</html>

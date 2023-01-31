@@ -43,11 +43,16 @@
 
     <select id="SEL_ARTILCE_MNG_NAME" resultType="com.model.sql.dto.ArticleMNG" parameterType="com.param.ParamBean">
         SELECT 
-          A.TITLE 
+          A.TITLE, 
+          A.NAME, 
+          B.DIR AS CATEGORY_DIR 
         FROM 
-          ARTICLE_MNG A 
+          ARTICLE_MNG A, 
+          CATEGORY_MNG B 
         WHERE 
-          A.NAME = #{path} 
+          A.CATEGORY_ID = B.ID 
+        AND 
+          A.id = #{id} 
     </select>
 
     <select id="SEL_SIDE_LINK" resultType="com.model.sql.dto.SideLink" parameterType="com.param.ParamBean">
@@ -118,6 +123,20 @@
         ORDER BY A.ID 
     </select>
 
+    <select id="SEL_CONTENT_NAME" resultType="com.model.sql.dto.ContentMng" parameterType="com.param.ParamBean">
+        SELECT 
+          A.ID, 
+          A.NAME, 
+          A.PATH, 
+          A.FILE_NAME, 
+          A.SIZE, 
+          A.TYPE 
+        FROM 
+          CONTENT_MNG A
+        WHERE 
+          A.ID = #{id}
+    </select>
+
     <update id="UPD_CONTENT_DL_SEQ_RESET">
         UPDATE 
           CONTENT_DL_SEQ 
@@ -171,5 +190,39 @@
 		  #{agent} 
 		);
     </insert>
+
+    <select id="SEL_EXERCISES_MNG" resultType="com.model.sql.dto.ExercisesMng" parameterType="com.param.ParamBean">
+        SELECT 
+          LANG, 
+          ID, 
+          NAME, 
+          PATH 
+        FROM 
+          EXERCISES_MNG 
+        WHERE 
+          LANG = #{name}
+        AND 
+          ID = #{id}
+    </select>
+
+    <select id="SEL_EXERCISES_MENU" resultType="com.model.sql.dto.ExercisesMng" parameterType="com.param.ParamBean">
+        SELECT 
+          LANG, 
+          ID, 
+          NAME 
+        FROM 
+          EXERCISES_MNG 
+        WHERE 
+          LANG = #{name}
+    </select>
+
+    <select id="SEL_EXERCISES_LIST" resultType="com.model.sql.dto.ExercisesMng">
+        SELECT 
+          LANG 
+        FROM 
+          EXERCISES_MNG 
+        WHERE 
+          ID = 1
+    </select>
 
 </mapper>

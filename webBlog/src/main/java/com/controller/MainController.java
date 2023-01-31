@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.controller.builder.PageBuilder;
 import com.model.sql.dao.DaoBase;
 import com.model.sql.mapper.ArticleMapper;
-import com.param.ParamBean;
-import com.util.RequestCipher;
 import com.util.UserAgentType;
 
 @Controller
@@ -27,60 +25,68 @@ public class MainController extends PageBuilder {
 	public String home(Model model, @RequestHeader("User-Agent") String userAgent, 
 			HttpServletResponse response, HttpServletRequest request) {
 
+		super.execute(model, userAgent);
+
 		String ret = "main/home";
-//		if (UserAgentType.checkMobile(userAgent)) {
-//			ret = "mobile/mhome";
-//		} else {
-			super.execute(model, userAgent);
-//		}
+		if (UserAgentType.checkMobile(userAgent)) {
+			ret = "mobile/mhome";
+		}
 
 		return ret;
 	}
 
 	@RequestMapping(name="category", path="/category")
-	public String category(Model model, @RequestParam("get") String param, @RequestHeader("User-Agent") String userAgent, 
+	public String category(Model model, @RequestParam("pageid") String id, @RequestParam("type") String type, @RequestHeader("User-Agent") String userAgent, 
 			HttpServletResponse response, HttpServletRequest request) {
 
-		RequestCipher cipr = new RequestCipher();
-		ParamBean bean = cipr.decode(param);
-
+		super.executeCategory(model, id, type, userAgent);
 		String ret = "main/category";
-//		if (UserAgentType.checkMobile(userAgent)) {
-//			ret = "mobile/mhome";
-//		} else {
-			super.executeCategory(model, bean, userAgent);
-//		}
+		if (UserAgentType.checkMobile(userAgent)) {
+			ret = "mobile/category";
+		}
 
 		return ret;
 	}
 
 	@RequestMapping(name="article", path="/article")
-	public String article(Model model, @RequestParam("get") String param, @RequestHeader("User-Agent") String userAgent, 
+	public String article(Model model, @RequestParam("pageid") String id, @RequestHeader("User-Agent") String userAgent, 
 			HttpServletResponse response, HttpServletRequest request) {
 
-		RequestCipher cipr = new RequestCipher();
-		ParamBean bean = cipr.decode(param);
-
+		super.executeArticle(model, id, userAgent);
 		String ret = "main/article";
-//		if (UserAgentType.checkMobile(userAgent)) {
-//			ret = "mobile/mhome";
-//		} else {
-			super.executeArticle(model, bean, userAgent);
-//		}
+		if (UserAgentType.checkMobile(userAgent)) {
+			ret = "mobile/article";
+		}
 
 		return ret;
 	}
 
 	@RequestMapping(name="content", path="/content")
-	public String content(Model model, @RequestParam("get") String param, @RequestHeader("User-Agent") String userAgent, 
+	public String content(Model model, @RequestParam("pageid") String id, @RequestHeader("User-Agent") String userAgent, 
 			HttpServletResponse response, HttpServletRequest request) {
 
-		RequestCipher cipr = new RequestCipher();
-		ParamBean bean = cipr.decode(param);
+		super.executeContent(model, id, userAgent);
 
-		super.executeContent(model, bean, userAgent);
+		String ret = "main/content";
+		if (UserAgentType.checkMobile(userAgent)) {
+			ret = "mobile/content";
+		}
 
-		return "main/content";
+		return ret;
+	}
+
+	@RequestMapping(name="exercises", path="/exercises")
+	public String exercises(Model model, @RequestParam("lang") String lang, @RequestParam("pageid") String id, 
+			@RequestParam("type") String type, @RequestHeader("User-Agent") String userAgent, 
+			HttpServletResponse response, HttpServletRequest request) {
+
+		super.executeExercises(model, lang, id, type, userAgent);
+
+		String ret = "main/exercises";
+		if (UserAgentType.checkMobile(userAgent)) {
+			ret = "mobile/exercises";
+		}
+		return ret;
 	}
 
 	@RequestMapping(name="download", path="/download")

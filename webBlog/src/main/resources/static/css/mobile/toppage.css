@@ -12,8 +12,8 @@
 }
 
 .menulist {
-    float: left;
-    width: 100%;
+    float: right;
+    width: 95%;
     text-align:left;
     font-size: 100%;
     margin-top: 10px;

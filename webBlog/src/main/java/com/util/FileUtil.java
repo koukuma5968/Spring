@@ -17,6 +17,8 @@ public class FileUtil {
 
 	public static final String contentPass = "/content";
 
+	public static final String exercisesPass = "/exercises/";
+
 	public static final String description = "/description/";
 
 	public static String getDocumentroot() {

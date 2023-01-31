@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<body>
+    <div class="exercises_menu" th:fragment="exercisesmenuFragment">
+        <div class="exercises_info" th:each="menu: ${exercisesMenu}">
+            <div class="link">
+                <a th:href="@{'/exercises?lang='+${menu.lang}+'&pageid='+${menu.id}+'&type=0'}" th:text="${menu.name}"></a>
+                <ul>
+                    <li>
+                        <a th:href="@{'/exercises?lang='+${menu.lang}+'&pageid='+${menu.id}+'&type=1'}">
+                        <img alt="" th:src="@{/img/ancer.png}" />解答例</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

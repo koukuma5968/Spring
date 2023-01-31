@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<body>
+    <th:block th:fragment="exercisesFragment">
+        <h3>問題集</h3>
+        <ul>
+            <li class="link" th:each="exercises: ${execisesList}">
+                <a th:href="@{'/exercises?lang='+${exercises.lang}+'&pageid=1&type=0'}" th:text="${exercises.lang}+' 練習問題'"></a>
+            </li>
+        </ul>
+    </th:block>
+</body>
+</html>

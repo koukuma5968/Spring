@@ -46,3 +46,34 @@ font-size: 90%;
 width: auto;
 margin: 0px;
 }
+
+#left_hamburger {
+  position: fixed;
+  background:#666666;         /* 背景色 */
+  cursor: pointer;            /* マウスカーソル指 */
+  width: 50px;                /* 高さ */
+  border-radius: 5px;         /* 角を丸める */
+  left: 0px;                 /* 表示位置右 */
+  top: 0px;                   /* 表示位置上 */
+  transition: 1s;
+  z-index: 2;
+  height:100%;
+}
+.inner_line {
+    display: inline-block;     /* 要素内ブロック */
+    position: absolute;        /* 絶対位置指定   */
+    height:3px;                /* 線の太さ       */
+    width: 25px;               /* 線の長さ       */
+    background: #fff;          /* 線の色         */
+    left: 12.5px;
+}
+#line1 {
+  top: 10px;
+}
+#line2 {
+  top: 25px;
+}
+#line3 {
+  top: 40px;
+}
+

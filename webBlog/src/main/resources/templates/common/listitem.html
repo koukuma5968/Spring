@@ -4,7 +4,7 @@
 <body>
 	<th:block th:fragment="listitemFragment">
 	   <div class="item" th:each="item: ${itemList}">
-	       <a th:href="@{'/article?get='+${item.encParam}}" th:text="${item.text}"></a>
+	       <a th:href="@{'/article?pageid='+${item.id}}" th:text="${item.text}"></a>
 	   </div>
 	</th:block>
 </body>
